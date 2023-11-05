@@ -1,0 +1,49 @@
+{
+   "name": "@jbloggz/use-api",
+   "version": "1.0.0",
+   "description": "A react hook that wraps react-query and handles JWT authentication",
+   "main": "dist/useAPI.js",
+   "types": "dist/useAPI.d.ts",
+   "scripts": {
+      "build": "tsc",
+      "test": "vitest test",
+      "clean": "rm -r dist"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/jbloggz/use-api.git"
+   },
+   "keywords": [
+      "react",
+      "API",
+      "JWT"
+   ],
+   "author": "Josef Barnes",
+   "license": "MIT",
+   "bugs": {
+      "url": "https://github.com/jbloggz/use-api/issues"
+   },
+   "homepage": "https://github.com/jbloggz/use-api#readme",
+   "devDependencies": {
+      "@testing-library/jest-dom": "^6.1.4",
+      "@testing-library/react": "^14.0.0",
+      "@types/react": "^18.2.34",
+      "@vitejs/plugin-react": "^4.1.1",
+      "http-status-codes": "^2.3.0",
+      "jsdom": "^22.1.0",
+      "jwt-encode": "^1.0.1",
+      "typescript": "^5.2.2",
+      "vitest": "^0.34.6"
+   },
+   "peerDependencies": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+   },
+   "dependencies": {
+      "@tanstack/react-query": "^5.7.0",
+      "async-mutex": "^0.4.0",
+      "jwt-decode": "^4.0.0",
+      "use-local-storage-state": "^19.1.0",
+      "use-session-storage-state": "^18.2.0"
+   }
+}
