@@ -20,6 +20,6 @@ export default defineConfig({
          all: true,
       },
       environment: 'jsdom',
-      setupFiles: './test/testSetup.ts'
+      setupFiles: './src/test/testSetup.ts'
    },
 });

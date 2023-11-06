@@ -9,12 +9,10 @@
 import { useEffect, useState } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import jwtEncode from 'jwt-encode';
-import mockFetch from './mockFetch';
-import useAPI from '../src/useAPI';
-
-const queryClient = new QueryClient();
+import mockFetch from '@jbloggz/mock-fetch';
+import useAPI from '../useAPI';
+import APIProvider from '../APIProvider';
 
 describe('useAPI', () => {
    beforeEach(() => {
@@ -28,9 +26,9 @@ describe('useAPI', () => {
          return <div role="test">{api ? 'yes' : 'no'}</div>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       const val = screen.getByRole('test');
       expect(val.textContent).toBe('yes');
@@ -54,9 +52,9 @@ describe('useAPI', () => {
          return <p>{value}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('world'));
       expect(mockFetch.calls().length).toEqual(1);
@@ -93,9 +91,9 @@ describe('useAPI', () => {
          return <p>{value}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('world'));
       expect(mockFetch.calls().length).toEqual(1);
@@ -128,9 +126,9 @@ describe('useAPI', () => {
          return <p>{value}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('post_world'));
       expect(mockFetch.calls().length).toEqual(1);
@@ -162,9 +160,9 @@ describe('useAPI', () => {
          return <p>{value}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('put_world'));
       expect(mockFetch.calls().length).toEqual(1);
@@ -196,9 +194,9 @@ describe('useAPI', () => {
          return <p>{value}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('delete_world'));
       expect(mockFetch.calls().length).toEqual(1);
@@ -246,24 +244,24 @@ describe('useAPI', () => {
       };
 
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('success'));
 
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <LogoutComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('logout'));
       expect(localStorage.getItem('access_token')).toBe(null);
 
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('Missing access token'));
    });
@@ -301,9 +299,9 @@ describe('useAPI', () => {
       };
 
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <LoginComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('joe@example.com'));
       expect(mockFetch.calls().length).toEqual(1);
@@ -331,9 +329,9 @@ describe('useAPI', () => {
          return <p>{value}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('success'));
    });
@@ -371,9 +369,9 @@ describe('useAPI', () => {
       };
 
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <LoginComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('joe@example.com'));
       expect(mockFetch.calls().length).toEqual(1);
@@ -403,9 +401,9 @@ describe('useAPI', () => {
          return <p>{value}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('success'));
    });
@@ -428,9 +426,9 @@ describe('useAPI', () => {
          return <p>{done}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('done'));
       expect(mockFetch.calls().length).toEqual(1);
@@ -479,9 +477,9 @@ describe('useAPI', () => {
          return <p>{success}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('success'));
       expect(mockFetch.calls().length).toBeGreaterThan(0);
@@ -527,9 +525,9 @@ describe('useAPI', () => {
          return <p>{done}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('Missing access token'));
    });
@@ -560,9 +558,9 @@ describe('useAPI', () => {
          return <p>{done}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       await waitFor(() => screen.getByText('done'));
       expect(mockFetch.calls().length).toEqual(1);
@@ -589,9 +587,9 @@ describe('useAPI', () => {
          return <p role="test">{api.user}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       const val = screen.getByRole('test');
       expect(val.textContent).toBe('joe@example.com');
@@ -631,9 +629,9 @@ describe('useAPI', () => {
          return <p role="test">{value}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       const val = screen.getByRole('test');
       await waitFor(() => expect(val.textContent).not.toBe('waiting'));
@@ -674,9 +672,9 @@ describe('useAPI', () => {
          return <p role="test">{value}</p>;
       };
       render(
-         <QueryClientProvider client={queryClient}>
+         <APIProvider>
             <TestComponent />
-         </QueryClientProvider>
+         </APIProvider>
       );
       const val = screen.getByRole('test');
       await waitFor(() => expect(val.textContent).not.toBe('waiting'));
