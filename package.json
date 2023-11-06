@@ -1,6 +1,6 @@
 {
    "name": "@jbloggz/use-api",
-   "version": "1.0.0",
+   "version": "1.0.1",
    "description": "A react hook that wraps react-query and handles JWT authentication",
    "main": "dist/index.js",
    "types": "dist/index.d.ts",
